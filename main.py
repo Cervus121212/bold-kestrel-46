@@ -361,8 +361,10 @@ def draw(cv):
 
 
 def main():
-    out = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                       "entry.png")
+    # Server runs /bot read-only: write into MAKEFUN_OUTPUT_DIR when set.
+    outdir = os.environ.get("MAKEFUN_OUTPUT_DIR") or os.path.dirname(
+        os.path.abspath(__file__))
+    out = os.path.join(outdir, "entry.png")
     cv = Canvas(W, H, PAPER)
     draw(cv)
     data = png_bytes(cv)
